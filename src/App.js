@@ -8,6 +8,8 @@ import Main from "./pages/Main";
 import Navbar from "./Components/Navbar/Navbar";
 // import Recordings from "./pages/Recordings";
 // import NewRecording from "./pages/NewRecording";
+import Games from "./pages/Games";
+import Experiments from "./pages/Experiments";
 function App() {
   // const JSDOM = require("jsdom").JSDOM;
 
@@ -38,6 +40,11 @@ function App() {
             ></Route>
             <Route path="/recordings/" element={<Recordings />}></Route> */}
             <Route path="/" element={<Main />} />
+            <Route path="/games" element={<Games></Games>}></Route>
+            <Route
+              path="/experiments"
+              element={<Experiments></Experiments>}
+            ></Route>
           </Routes>
         </Router>
       </Auth0Provider>

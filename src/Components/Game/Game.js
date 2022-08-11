@@ -1,9 +1,11 @@
 import { React, useEffect, useCallback, useState } from "react";
 import { CSVLink, CSVDownload } from "react-csv";
 import axios from "axios";
+import {useAuth0} from "@auth0/auth0-react"
 
 const Character = require("./character.png");
 const Game = (props) => {
+  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
   const [arr, setArr] = useState([]);
   const [input, setInput] = useState([]);
   const [timeStamps, setTimeStamps] = useState([]);
@@ -127,10 +129,12 @@ const Game = (props) => {
   }, [handleUserKeyPress]);
 
   const saveRecording = () => {
+  
+    
     var data = JSON.stringify({
       subject: "the subject",
-      experimentId: "69",
-      author: "yo mama",
+      experimentId: "69", // idk
+      author: user?.name,
     });
     var config = {
       method: "post",

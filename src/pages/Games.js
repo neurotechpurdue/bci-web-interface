@@ -5,7 +5,7 @@ const Games = (props) => {
   return (
     <Layout>
       <h1>Games</h1>
-      <Table></Table>
+      <Table columns={["id", "name", "Game"]}></Table>
     </Layout>
     //todo: List of games
     //make the list myself using a good old table?

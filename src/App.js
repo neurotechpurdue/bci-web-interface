@@ -10,7 +10,8 @@ import Navbar from "./Components/Navbar/Navbar";
 // import NewRecording from "./pages/NewRecording";
 import Games from "./pages/Games";
 import Experiments from "./pages/Experiments";
-import StartRecording from './pages/Recordings/StartRecording';
+import StartRecording from "./pages/Recordings/StartRecording";
+import Recording from "./pages/Recordings/Recording";
 function App() {
   // const JSDOM = require("jsdom").JSDOM;
 
@@ -41,8 +42,15 @@ function App() {
             ></Route>
             <Route path="/recordings/" element={<Recordings />}></Route> */}
             <Route path="/" element={<Main />} />
+            <Route
+              path="/recording/:recording_id"
+              element={<Recording />}
+            ></Route>
             <Route path="/games" element={<Games></Games>}></Route>
-            <Route path="/recording/start" element={<StartRecording></StartRecording>}></Route>
+            <Route
+              path="/recording/start"
+              element={<StartRecording></StartRecording>}
+            ></Route>
             <Route
               path="/experiments"
               element={<Experiments></Experiments>}

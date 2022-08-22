@@ -9,9 +9,10 @@ import Navbar from "./Components/Navbar/Navbar";
 // import Recordings from "./pages/Recordings";
 // import NewRecording from "./pages/NewRecording";
 import Games from "./pages/Games";
-import Experiments from "./pages/Experiments";
+import Experiments from "./pages/Experiments/Experiments";
 import StartRecording from "./pages/Recordings/StartRecording";
 import Recording from "./pages/Recordings/Recording";
+import Experiment from "./pages/Experiments/Experiment";
 function App() {
   // const JSDOM = require("jsdom").JSDOM;
 
@@ -48,8 +49,12 @@ function App() {
             ></Route>
             <Route path="/games" element={<Games></Games>}></Route>
             <Route
-              path="/recording/start"
+              path="/recording/new"
               element={<StartRecording></StartRecording>}
+            ></Route>
+            <Route
+              path="/experiment/:experiment_id"
+              element={<Experiment />}
             ></Route>
             <Route
               path="/experiments"

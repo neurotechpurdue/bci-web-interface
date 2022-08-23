@@ -176,6 +176,9 @@ const Game = (props) => {
       subject: "the subject",
       experimentId: "69", // idk
       author: "Me!",
+      configuration: "Cyton + Daisy",
+      sampleRate: "200 Hz",
+      trials: "30",
     });
     var config = {
       method: "post",
@@ -238,14 +241,16 @@ const Game = (props) => {
 
       {trialsLeft == 0 && (
         <>
-          <CSVLink
-            data={csvData}
-            headers={headers}
-            filename={"stimChannel.csv"}
-          >
-            Download Stim channel CSV Data
-          </CSVLink>
-
+          <button>
+            <CSVLink
+              data={csvData}
+              headers={headers}
+              filename={"stimChannel.csv"}
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              Download Stim channel CSV Data
+            </CSVLink>
+          </button>
           <button target="_blank" onClick={saveRecording}>
             {" "}
             Save recording to AWS and get File location

@@ -75,6 +75,7 @@ const Experiment = (props) => {
     // ];
   };
 
+
   return (
     //todo: Experiment page with id, name, game, author and all recordings associated w experiment in a table
     <Layout>

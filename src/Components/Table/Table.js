@@ -36,7 +36,7 @@ const Table = (props) => {
           console.log(tr);
         }
       }
-      tr = <tr> {tr}</tr>;
+      tr = <tr>{tr}</tr>;
       console.log(tr);
       return tr;
       //must create row too

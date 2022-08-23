@@ -1,16 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Layout from "../../Components/Layout/Layout";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const StartRecording = (props) => {
+  const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
+
+  //get author
+  var author = user?.name;
   const [experiment, setExperiment] = useState(null);
 
   const [subject, setSubject] = useState("Unknown");
-  const [trialCount, setTrialCount] = useState(-1);
+  const [trials, setTrials] = useState(-1);
   const [notes, setNotes] = useState("no notes");
-  const [game, setGame] = useState("no game");
   const [configuration, setConfiguration] = useState("undefined");
-  const [samplingFrequency, setSamplingFrequency] = useState(-1);
+  const [sampleRate, setsampleRate] = useState(-1);
 
+  const [experiments, setExperiments] = useState([]);
   const options = [
     {
       label: "Apple",
@@ -29,6 +35,32 @@ const StartRecording = (props) => {
       value: "pineapple",
     },
   ];
+
+  useEffect(() => {
+    getExperiments();
+  }, []);
+
+  useEffect(() => {
+    console.log(experiments);
+  }, [experiments]);
+
+  const getExperiments = () => {
+    var config = {
+      method: "get",
+      url: "http://localhost:3001/api/experiments",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    axios(config)
+      .then(function (response) {
+        setExperiments(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   const selectExperiment = (e) => {
     setExperiment(e.target.value);
@@ -50,6 +82,17 @@ const StartRecording = (props) => {
   };
 
   const handleSubmit = (props) => {
+    var obj = {
+      subject: subject,
+      experiment: experiment._id,
+      author,
+      configuration,
+      sampleRate,
+      trials,
+    };
+    localStorage.setItem("recordingParameters", JSON.stringify(obj));
+
+    console.log(localStorage.getItem("recordingParameters"));
     // TODO: Axios call to startRecording API endpoint
   };
 
@@ -81,8 +124,8 @@ const StartRecording = (props) => {
           <div id="t1" class="tabcontent" style={{ display: "block" }}>
             Select Experiment
             <select value={experiment} onChange={selectExperiment}>
-              {options.map((option) => (
-                <option value={option.value}>{option.label}</option>
+              {experiments.map((exp) => (
+                <option value={exp._id}>{exp.name}</option>
               ))}
             </select>
             <div>
@@ -95,7 +138,7 @@ const StartRecording = (props) => {
               Sampling frequency (in Hz){" "}
               <input
                 type="text"
-                onChange={(e) => setSamplingFrequency(e.target.value)}
+                onChange={(e) => setsampleRate(e.target.value)}
                 placeholder="200"
               ></input>
             </div>
@@ -124,18 +167,10 @@ const StartRecording = (props) => {
               ></input>
             </div>
             <div>
-              Game{" "}
-              <input
-                type="text"
-                onChange={(e) => setGame(e.target.value)}
-                placeholder="left/right experiment (will become a multiple options selector after backend revision"
-              ></input>
-            </div>
-            <div>
               Number of trials{" "}
               <input
                 type="text"
-                onChange={(e) => setTrialCount(e.target.value)}
+                onChange={(e) => setTrials(e.target.value)}
                 placeholder="20"
               ></input>
             </div>

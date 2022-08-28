@@ -10,7 +10,7 @@ const axios = require("axios");
 Chart.register(StreamingPlugin);
 // const socket = io.connect("http://localhost:8000");
 // Class
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect(process.env.REACT_APP_BACKEND_URL);
 
 const Streaming = (props) => {
   // useEffect(() => {
@@ -47,10 +47,11 @@ const Streaming = (props) => {
       console.log("start streaming!");
       // start datastream
       var data = JSON.stringify({ startTime: Date.now() });
+      var url = `${process.env.REACT_APP_BACKEND_URL}/api/recordings/start`;
 
       var config = {
         method: "post",
-        url: "http://localhost:3001/api/recordings/start",
+        url: url,
         headers: {
           "Content-Type": "application/json",
         },
@@ -70,9 +71,11 @@ const Streaming = (props) => {
     } else if (stream == true) {
       //stream == true
 
+      var url = `${process.env.REACT_APP_BACKEND_URL}/api/recordings`;
+
       var config = {
         method: "post",
-        url: "http://localhost:3001/api/recordings",
+        url: url,
         headers: {
           "Content-Type": "application/json",
         },
@@ -105,11 +108,6 @@ const Streaming = (props) => {
   //   function handleTest() {
   //     setComponent(<Test />);
   //   }
-  function sendTestRoute() {
-    axios.get("http://localhost:8000/").then((response) => {
-      console.log(response);
-    });
-  }
   const config = {
     type: "line",
     data: {
@@ -131,7 +129,6 @@ const Streaming = (props) => {
       {/* <button onClick={handleStream}>Stream</button>
       <button onClick={handleTrain}>Train</button>
       <button onClick={handleTest}>Test</button> */}
-      <button onClick={sendTestRoute}>Send test route</button>
       {/* {component} */}
       <Line
         data={{

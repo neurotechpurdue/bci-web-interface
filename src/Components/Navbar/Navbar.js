@@ -7,13 +7,19 @@ const Navbar = () => {
   //   const { name, email } = user;
   return (
     <div className="navbar">
-      {!isAuthenticated && <button onClick={loginWithRedirect}>Log in</button>}
+      BCI Dashboard
+      {!isAuthenticated && (
+        <button onClick={loginWithRedirect} style={{ margin: "0 10px" }}>
+          Log in
+        </button>
+      )}
       {isAuthenticated && (
         <>
           <button
             onClick={() => {
               logout({ returnTo: window.location.origin });
             }}
+            style={{ margin: "0 10px" }}
           >
             Log out
           </button>

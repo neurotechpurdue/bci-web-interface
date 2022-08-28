@@ -12,9 +12,10 @@ const Experiments = (props) => {
   }, []);
   const getExperiments = () => {
     console.log("getting experiments");
+    var url = `${process.env.REACT_APP_BACKEND_URL}/api/experiments/`;
     var config = {
       method: "get",
-      url: "http://localhost:3001/api/experiments/",
+      url: url,
       headers: {
         "Content-Type": "application/json",
       },

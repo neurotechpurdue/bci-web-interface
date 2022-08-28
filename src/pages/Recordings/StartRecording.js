@@ -47,7 +47,7 @@ const StartRecording = (props) => {
   const getExperiments = () => {
     var config = {
       method: "get",
-      url: "http://localhost:3001/api/experiments",
+      url: `${process.env.REACT_APP_BACKEND_URL}/api/experiments`,
       headers: {
         "Content-Type": "application/json",
       },

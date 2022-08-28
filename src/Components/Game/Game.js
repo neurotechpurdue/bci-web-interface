@@ -139,9 +139,11 @@ const Game = (props) => {
 
   function StartAndStopRecording() {
     if (!start) {
+      var url = `${process.env.REACT_APP_BACKEND_URL}/api/recordings/start`;
+      console.log(url);
       var config = {
         method: "post",
-        url: "http://localhost:3001/api/recordings/start",
+        url: url,
         headers: {
           "Content-Type": "application/json",
         },
@@ -180,9 +182,11 @@ const Game = (props) => {
       sampleRate: "200 Hz",
       trials: "30",
     });
+    var url = `${process.env.REACT_APP_BACKEND_URL}/api/recordings`;
+
     var config = {
       method: "post",
-      url: "http://localhost:3001/api/recordings",
+      url: url,
       headers: {
         "Content-Type": "application/json",
       },
@@ -206,9 +210,11 @@ const Game = (props) => {
       experimentId: "69",
       author: "yo mama",
     });
+    var url = `${process.env.REACT_APP_BACKEND_URL}/api/recordings/start`;
+
     var config = {
       method: "post",
-      url: "http://localhost:3001/api/recordings",
+      url: url,
       headers: {
         "Content-Type": "application/json",
       },

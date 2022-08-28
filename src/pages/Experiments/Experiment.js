@@ -15,7 +15,7 @@ const Experiment = (props) => {
 
   const getRecordingsByExperimentId = () => {
     var data = JSON.stringify({ experimentId: "1" });
-    var url = `http://localhost:3001/api/experiment/${experiment_id}/recordings`;
+    var url = `${process.env.REACT_APP_BACKEND_URL}/api/experiment/${experiment_id}/recordings`;
     console.log(url);
     var config = {
       method: "get",
@@ -74,7 +74,6 @@ const Experiment = (props) => {
     //   },
     // ];
   };
-
 
   return (
     //todo: Experiment page with id, name, game, author and all recordings associated w experiment in a table

@@ -2,6 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // import 'chartjs-adapter-luxon';
 import { Auth0Provider } from "@auth0/auth0-react";
 
+import { useEffect } from "react";
+
 import Streaming from "./pages/Streaming";
 import Main from "./pages/Main";
 // import Train from "./Components/Train";
@@ -23,6 +25,15 @@ function App() {
   //   },
   // });
   // global.crypto.subtle = {}; // this gets around the 'auth0-spa-js must run on a secure origin' error
+
+  useEffect(() => {
+    console.log(process.env.NODE_ENV);
+    process.env.NODE_ENV == "development"
+      ? localStorage.setItem("api_url", "localhost:3001")
+      : localStorage.setItem("api_url", process.env.REACT_APP_BACKEND_URL);
+
+    document.title = "NSP BCI Dashboard";
+  }, []);
   return (
     <>
       <Auth0Provider

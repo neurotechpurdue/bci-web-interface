@@ -66,7 +66,8 @@ const Game = (props) => {
 
   useEffect(() => {
     console.log(EEGUrl);
-    if (EEGUrl != null) {
+    if (EEGUrl.length != 0) {
+      console.log("EEGUrl not null");
       axios({
         url: EEGUrl, //your url
         method: "GET",
@@ -197,7 +198,8 @@ const Game = (props) => {
       .then(function (response) {
         setEEGData(response.data);
         setEEGUrl(response.data);
-        // console.log(JSON.stringify(response.data));
+        console.log(response.data);
+        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);

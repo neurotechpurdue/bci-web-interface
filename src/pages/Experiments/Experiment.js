@@ -1,10 +1,12 @@
 import React, { useEffect } from "react";
 import { useHistory, useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
 import Table from "../../Components/Table/Table";
 import Layout from "./../../Components/Layout/Layout";
 var axios = require("axios");
 const Experiment = (props) => {
   const { experiment_id } = useParams();
+  let navigate = useNavigate();
 
   //TODO: Get experiment name
   //TODO: Get recordings by experiment_id
@@ -14,7 +16,8 @@ const Experiment = (props) => {
   }, []);
 
   const getRecordingsByExperimentId = () => {
-    var data = JSON.stringify({ experimentId: "1" });
+    console.log(experiment_id);
+    // var data = JSON.stringify({ experimentId: experiment_id });
     var url = `${process.env.REACT_APP_BACKEND_URL}/api/experiment/${experiment_id}/recordings`;
     console.log(url);
     var config = {
@@ -23,7 +26,7 @@ const Experiment = (props) => {
       headers: {
         "Content-Type": "application/json",
       },
-      data: data,
+      // data: data,
     };
 
     axios(config)
@@ -81,6 +84,12 @@ const Experiment = (props) => {
       <h1> Experiment {experiment_id} </h1>
       <p> id, name, game</p>
       {/* recordings table */}
+      {console.log(`/experiment/${experiment_id}/recording/new`)}
+      <button
+        onClick={() => navigate(`/experiment/${experiment_id}/recording/new`)}
+      >
+        Create recording
+      </button>
       <Table
         columns={[
           "Id",

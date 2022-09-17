@@ -26,14 +26,14 @@ function App() {
   // });
   // global.crypto.subtle = {}; // this gets around the 'auth0-spa-js must run on a secure origin' error
 
-  useEffect(() => {
-    console.log(process.env.NODE_ENV);
-    process.env.NODE_ENV == "development"
-      ? localStorage.setItem("api_url", "localhost:3001")
-      : localStorage.setItem("api_url", process.env.REACT_APP_BACKEND_URL);
+  // useEffect(() => {
+  //   console.log(process.env.NODE_ENV);
 
-    document.title = "NSP BCI Dashboard";
-  }, []);
+  //   process.env.NODE_ENV == "development"
+  //     // ? localStorage.setItem("api_url", "localhost:3001")
+  //     // : localStorage.setItem("api_url", process.env.REACT_APP_BACKEND_URL);
+  //   document.title = "NSP BCI Dashboard";
+  // }, []);
   return (
     <>
       <Auth0Provider
@@ -61,7 +61,7 @@ function App() {
             ></Route>
             <Route path="/games" element={<Games></Games>}></Route>
             <Route
-              path="/recording/new"
+              path="/experiment/:experiment_id/recording/new"
               element={<StartRecording></StartRecording>}
             ></Route>
             <Route path="/experiment/new" element={<NewExperiment />}></Route>

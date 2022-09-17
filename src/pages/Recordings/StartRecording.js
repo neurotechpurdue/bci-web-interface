@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import Layout from "../../Components/Layout/Layout";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import { useParams } from "react-router";
 const StartRecording = (props) => {
   const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
-
+  const { experiment_id } = useParams();
   //get author
   var author = user?.name;
   const [experiment, setExperiment] = useState(null);
@@ -98,7 +98,8 @@ const StartRecording = (props) => {
 
   return (
     <Layout>
-      This page is a work in progress.
+      <h2>Experiment {experiment_id}</h2>
+      <h3>New recording</h3>
       {/* I know, i know, inline styling is bad. But good css practices isn't my priority rn */}
       {/* Tabs source code: https://www.w3schools.com/howto/howto_js_tabs.asp */}
       <div
@@ -111,9 +112,6 @@ const StartRecording = (props) => {
           backgroundColor: "light-grey",
         }}
       >
-        <button class="tablinks" onClick={(e) => openTab(e, "t1")}>
-          Select experiment
-        </button>
         <button class="tablinks" onClick={(e) => openTab(e, "t2")}>
           Specify recording parameters
         </button>
@@ -121,19 +119,7 @@ const StartRecording = (props) => {
           Start recording
         </button>
         <div style={{ padding: "20px" }}>
-          <div id="t1" class="tabcontent" style={{ display: "block" }}>
-            Select Experiment
-            <select value={experiment} onChange={selectExperiment}>
-              {experiments.map((exp) => (
-                <option value={exp._id}>{exp.name}</option>
-              ))}
-            </select>
-            <div>
-              {" "}
-              <button onClick={(e) => openTab(e, "t2")}> Next </button>
-            </div>
-          </div>
-          <div id="t2" class="tabcontent" style={{ display: "none" }}>
+          <div id="t2" class="tabcontent">
             <div>
               Sampling frequency (in Hz){" "}
               <input

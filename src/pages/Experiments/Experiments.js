@@ -3,13 +3,18 @@ import Table from "../../Components/Table/Table";
 import Layout from "../../Components/Layout/Layout";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 const Experiments = (props) => {
+  let navigate = useNavigate();
   const [tableData, setTableData] = useState([]);
   const { loginWithRedirect, user, isAuthenticated, logout } = useAuth0();
   const [experiments, setExperiments] = useState(null);
   useEffect(() => {
     getExperiments();
   }, []);
+
   const getExperiments = () => {
     console.log("getting experiments");
     var url = `${process.env.REACT_APP_BACKEND_URL}/api/experiments/`;
@@ -79,6 +84,9 @@ const Experiments = (props) => {
     <Layout>
       <h1>Experiments</h1>
       <button onClick={getExperiments}>Get experiments</button>
+      <button onClick={() => navigate("/experiment/new")}>
+        New experiment
+      </button>
       {tableData && (
         <Table columns={["id", "name", "game"]} data={tableData}></Table>
       )}

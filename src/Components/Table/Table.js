@@ -5,7 +5,6 @@ const Table = (props) => {
   const headers = props.columns.map((col, i) => {
     return <th scope="col">{col}</th>;
   });
-  console.log(headers);
 
   /* 
   const data = [
@@ -41,15 +40,12 @@ const Table = (props) => {
       return tr;
       //must create row too
     });
-    console.log(data);
   }
+  console.log(data);
   // same with the body
   return (
     <table>
-      <thead>
-        {/* for games */}
-        {headers}
-      </thead>
+      <thead>{headers}</thead>
       <tbody>{data}</tbody>
     </table>
   );

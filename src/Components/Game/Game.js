@@ -12,15 +12,23 @@ const Game = (props) => {
   const [EEGData, setEEGData] = useState("");
   const [start, setStart] = useState(false);
   const [EEGUrl, setEEGUrl] = useState("");
-  var nTrials = 100;
   var left = 37;
   var right = 39;
-  const [trialsLeft, setTrialsLeft] = useState(nTrials);
+  const [trialsLeft, setTrialsLeft] = useState(null);
 
   const [padding, setPadding] = useState(100);
   const [currentDirection, setCurrentDirection] = useState("left");
   const [index, setIndex] = useState(0);
   //https://stackoverflow.com/questions/55565444/how-to-register-event-with-useeffect-hooks
+
+  useEffect(() => {
+    var recordingParameters = JSON.parse(
+      localStorage.getItem("recordingParameters")
+    );
+    setTrialsLeft(recordingParameters.trials);
+    initializeGame();
+  }, []);
+
   const handleUserKeyPress = useCallback((event) => {
     if (start) {
       if (trialsLeft >= 1) {
@@ -60,9 +68,6 @@ const Game = (props) => {
       setPadding(padding + 20);
     }
   };
-  useEffect(() => {
-    initializeGame();
-  }, []);
 
   useEffect(() => {
     console.log(EEGUrl);
@@ -117,7 +122,7 @@ const Game = (props) => {
   };
 
   function initializeGame() {
-    for (var i = 0; i < nTrials; i++) {
+    for (var i = 0; i < trialsLeft; i++) {
       var n = Math.random() * 10;
       if (n > 5) {
         setArr((arr) => [...arr, "left"]);
@@ -143,7 +148,7 @@ const Game = (props) => {
       var url = `${process.env.REACT_APP_BACKEND_URL}/api/recordings/start`;
       console.log(url);
       var config = {
-        method: "post",
+        method: "post", //HTTP POST request
         url: url,
         headers: {
           "Content-Type": "application/json",
@@ -175,14 +180,22 @@ const Game = (props) => {
   }, [handleUserKeyPress]);
 
   const saveRecording = () => {
+    var recordingParameters = JSON.parse(
+      localStorage.getItem("recordingParameters")
+    ); //TODO: Fetch items from local storage properly
+
+    console.log(recordingParameters.experiment);
     var data = JSON.stringify({
-      subject: "the subject",
-      experimentId: "69", // idk
-      author: "Me!",
-      configuration: "Cyton + Daisy",
-      sampleRate: "200 Hz",
-      trials: "30",
+      subject: recordingParameters.subject,
+      experimentId: recordingParameters.experiment, // idk
+      author: recordingParameters.author,
+      configuration: recordingParameters.configuration,
+      sampleRate: recordingParameters.sampleRate,
+      trials: recordingParameters.trials,
     });
+
+    localStorage.removeItem("recordingParameters");
+
     var url = `${process.env.REACT_APP_BACKEND_URL}/api/recordings`;
 
     var config = {

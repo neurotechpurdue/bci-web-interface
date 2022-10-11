@@ -16,6 +16,7 @@ import StartRecording from "./pages/Recordings/StartRecording";
 import Recording from "./pages/Recordings/Recording";
 import Experiment from "./pages/Experiments/Experiment";
 import NewExperiment from "./pages/Experiments/NewExperiment";
+import Game from "./Components/Game/Game";
 function App() {
   // const JSDOM = require("jsdom").JSDOM;
 
@@ -65,6 +66,7 @@ function App() {
               element={<StartRecording></StartRecording>}
             ></Route>
             <Route path="/experiment/new" element={<NewExperiment />}></Route>
+            <Route path="/games/left_right" element={<Game />}></Route>
             <Route
               path="/experiment/:experiment_id"
               element={<Experiment />}

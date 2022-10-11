@@ -83,10 +83,10 @@ const Experiments = (props) => {
   return (
     <Layout>
       <h1>Experiments</h1>
-      <button onClick={getExperiments}>Get experiments</button>
-      <button onClick={() => navigate("/experiment/new")}>
+      {/* <button onClick={getExperiments}>Get experiments</button> */}
+      {/* <button onClick={() => navigate("/experiment/new")}>
         New experiment
-      </button>
+      </button> */}
       {tableData && (
         <Table columns={["id", "name", "game"]} data={tableData}></Table>
       )}

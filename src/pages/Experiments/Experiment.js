@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import Table from "../../Components/Table/Table";
@@ -7,7 +7,7 @@ var axios = require("axios");
 const Experiment = (props) => {
   const { experiment_id } = useParams();
   let navigate = useNavigate();
-
+  const [data, setData] = useState(null);
   //TODO: Get experiment name
   //TODO: Get recordings by experiment_id
 
@@ -41,28 +41,49 @@ const Experiment = (props) => {
   };
 
   const formatData = (data) => {
+    var objs = [];
     // "Id",
     //   "Configuration",
     //   "Sample rate",
     //   "Trials",
     //   "Subject",
     //   "Author",
-    var objs = [];
     data.map((recording) => {
       var obj = {
         id: {
           text: recording._id,
+          link: null,
         },
+        configuration: {
+          text: recording.configuration,
+          link: null,
+        },
+        sample_rate: {
+          text: recording.sample_rate,
+          link: null,
+        },
+        trials: {
+          text: recording.trials,
+          link: null,
+        },
+
         subject: {
           text: recording.subject,
+          link: null,
         },
         author: {
           text: recording.author,
+          link: null,
+        },
+        data: {
+          text: recording.data,
+          link: recording.data,
         },
       };
       objs.push(obj);
     });
-
+    console.log(objs);
+    setData(objs);
     //TODO: continue once recordings without authors and all that have been deleted
     // const formattedData = [
     //   {
@@ -82,7 +103,6 @@ const Experiment = (props) => {
     //todo: Experiment page with id, name, game, author and all recordings associated w experiment in a table
     <Layout>
       <h1> Experiment {experiment_id} </h1>
-      <p> id, name, game</p>
       {/* recordings table */}
       {console.log(`/experiment/${experiment_id}/recording/new`)}
       <button
@@ -98,8 +118,9 @@ const Experiment = (props) => {
           "Trials",
           "Subject",
           "Author",
+          "Download",
         ]}
-        data={null}
+        data={data}
       ></Table>
     </Layout>
   );

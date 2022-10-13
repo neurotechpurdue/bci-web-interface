@@ -25,7 +25,7 @@ Backend
 Before running the app, use the terminal to cd into both frontend and backend folders and run `npm install`.
 
 Then, in the backend folder, run
-`npm start`
+`npm run development`
 
 In the frontend folder, run
 `npm run development`

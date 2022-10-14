@@ -1,6 +1,6 @@
 # Getting Started with the web interface
 
-This project is a work-in-progress.
+This project is a work-in-progress
 
 ## Installing Node.js and NPM
 

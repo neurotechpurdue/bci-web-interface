@@ -1,7 +1,7 @@
 # Getting Started with the web interface
 
 This project is a work-in-progress
-(Triggering rebuild, delete this line)
+Triggering rebuild, delete this line
 
 ## Installing Node.js and NPM
 

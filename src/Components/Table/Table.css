@@ -1,7 +1,9 @@
-table,
-th,
-td {
-  border: 1px solid black;
+table {
+  background: rgba(186, 136, 233, 0.8);
   border-collapse: collapse;
-  padding: 5px 10px;
+  border-radius: 10px;
+}
+th, td {
+  padding: 10px;
+  border-spacing: 10px;
 }

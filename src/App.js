@@ -17,6 +17,7 @@ import Recording from "./pages/Recordings/Recording";
 import Experiment from "./pages/Experiments/Experiment";
 import NewExperiment from "./pages/Experiments/NewExperiment";
 import Game from "./Components/Game/Game";
+import Video from "./Components/Video/Video";
 function App() {
   // const JSDOM = require("jsdom").JSDOM;
 
@@ -49,11 +50,7 @@ function App() {
               path="/train"
               element={<Train name="vssss" data="weeeee" />}
             />
-            <Route
-              exact
-              path="/recordings/new"
-              element={<NewRecording />}
-            ></Route>
+            
             <Route path="/recordings/" element={<Recordings />}></Route> */}
             <Route path="/" element={<Main />} />
             <Route
@@ -75,6 +72,7 @@ function App() {
               path="/experiments"
               element={<Experiments></Experiments>}
             ></Route>
+            <Route path="/video" element={<Video></Video>}></Route>
           </Routes>
         </Router>
       </Auth0Provider>

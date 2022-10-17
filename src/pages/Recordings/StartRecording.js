@@ -89,8 +89,9 @@ const StartRecording = (props) => {
     localStorage.setItem("recordingParameters", JSON.stringify(obj));
 
     console.log(localStorage.getItem("recordingParameters"));
-    navigate("/games/left_right");
-    // TODO: Axios call to startRecording API endpoint
+    // navigate("/games/left_right");
+    // start recording for video experiment
+    navigate("/video");
   };
 
   return (

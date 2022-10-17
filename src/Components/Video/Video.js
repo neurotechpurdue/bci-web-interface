@@ -33,8 +33,8 @@ const Video = (props) => {
         <source src={vid} type="video/mp4"></source>
       </video>
 
-      {displayPlay && <button onClick={handlePlay}> Play </button>}
-      {!displayPlay && <button onClick={handlePause}> Pause </button>}
+      <button onClick={handlePlay}> Play </button>
+      <button onClick={handlePause}> Pause </button>
     </>
   );
 };

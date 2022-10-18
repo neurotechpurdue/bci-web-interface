@@ -63,7 +63,7 @@ function App() {
               element={<StartRecording></StartRecording>}
             ></Route>
             <Route path="/experiment/new" element={<NewExperiment />}></Route>
-            <Route path="/games/left_right" element={<Game />}></Route>
+            <Route path="/games/left-right" element={<Game />}></Route>
             <Route
               path="/experiment/:experiment_id"
               element={<Experiment />}
@@ -72,7 +72,7 @@ function App() {
               path="/experiments"
               element={<Experiments></Experiments>}
             ></Route>
-            <Route path="/video" element={<Video></Video>}></Route>
+            <Route path="/games/video" element={<Video></Video>}></Route>
           </Routes>
         </Router>
       </Auth0Provider>

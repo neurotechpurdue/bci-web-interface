@@ -20,6 +20,7 @@ const StartRecording = (props) => {
   const [isConnected, setIsConnected] = useState(false);
   const [experiments, setExperiments] = useState([]);
   const [isStreaming, setIsStreaming] = useState(false);
+  const [gamePage, setGamePage] = useState("");
   useEffect(() => {
     getExperiments();
     socket.on("connect", () => console.log(socket.id));
@@ -94,7 +95,7 @@ const StartRecording = (props) => {
 
     var config = {
       method: "post",
-      url: "localhost:3001/api/recordings/start",
+      url: `${process.env.REACT_APP_BACKEND_URL}/api/recordings/start`,
       headers: {},
     };
 
@@ -105,9 +106,21 @@ const StartRecording = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-
-    navigate("/video");
+    if (gamePage != null) {
+      console.log("Game page selected is null");
+      navigate(gamePage);
+    }
   };
+
+  function selectGame(event) {
+    if (event.target.value == "left-right") {
+      setGamePage("/games/left-right");
+    } else if (event.target.value == "left-right") {
+      setGamePage("/games/video");
+    } else {
+      console.log("Error: No game selected");
+    }
+  }
 
   return (
     <Layout>
@@ -185,6 +198,16 @@ const StartRecording = (props) => {
               onChange={(e) => setTrials(e.target.value)}
               placeholder="20"
             ></input>
+          </div>
+          <div>
+            <select>
+              <option value="left-right" handleChange={selectGame}>
+                Left Right
+              </option>
+              <option value="video" handleChange={selectGame}>
+                Video
+              </option>
+            </select>
           </div>
           <div>Created at 12:26 8:30 AM</div>
           <div>Author {author ? author : "unknown"}</div>

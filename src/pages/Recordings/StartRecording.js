@@ -91,6 +91,21 @@ const StartRecording = (props) => {
     console.log(localStorage.getItem("recordingParameters"));
     // navigate("/games/left_right");
     // start recording for video experiment
+
+    var config = {
+      method: "post",
+      url: "localhost:3001/api/recordings/start",
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
     navigate("/video");
   };
 

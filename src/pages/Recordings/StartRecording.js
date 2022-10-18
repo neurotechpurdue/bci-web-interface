@@ -21,6 +21,7 @@ const StartRecording = (props) => {
   const [experiments, setExperiments] = useState([]);
   const [isStreaming, setIsStreaming] = useState(false);
   const [gamePage, setGamePage] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   useEffect(() => {
     getExperiments();
     socket.on("connect", () => console.log(socket.id));
@@ -106,21 +107,15 @@ const StartRecording = (props) => {
       .catch(function (error) {
         console.log(error);
       });
-    if (gamePage != null) {
-      console.log("Game page selected is null");
-      navigate(gamePage);
+    console.log(selectedOption);
+    if (selectedOption == "left-right") {
+      navigate("/games/left-right");
+    } else if (selectedOption == "video") {
+      navigate("/games/video");
+    } else {
+      console.log("Error: No game selected. Cannot navigate to the next page");
     }
   };
-
-  function selectGame(event) {
-    if (event.target.value == "left-right") {
-      setGamePage("/games/left-right");
-    } else if (event.target.value == "left-right") {
-      setGamePage("/games/video");
-    } else {
-      console.log("Error: No game selected");
-    }
-  }
 
   return (
     <Layout>
@@ -200,13 +195,17 @@ const StartRecording = (props) => {
             ></input>
           </div>
           <div>
-            <select>
-              <option value="left-right" handleChange={selectGame}>
-                Left Right
-              </option>
-              <option value="video" handleChange={selectGame}>
-                Video
-              </option>
+            <select
+              value=""
+              onChange={(e) => {
+                setSelectedOption(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              {/* Below is not a viable option to account for the fact that clicking on left/right will not trigger onChange. I need to change it to something else  */}
+              <option value=" ">None</option>
+              <option value="left-right">Left Right</option>
+              <option value="video">Video</option>
             </select>
           </div>
           <div>Created at 12:26 8:30 AM</div>

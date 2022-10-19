@@ -3,17 +3,21 @@ import { useHistory, useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import Table from "../../Components/Table/Table";
 import Layout from "./../../Components/Layout/Layout";
+
+var JSZip = require("jszip");
 var axios = require("axios");
 const Experiment = (props) => {
   const { experiment_id } = useParams();
+  let recordingZip = experiment_id;
   let navigate = useNavigate();
   const [data, setData] = useState(null);
-  //TODO: Get experiment name
-  //TODO: Get recordings by experiment_id
+  const [recordings, setRecordings] = useState([]);
 
   useEffect(() => {
     getRecordingsByExperimentId();
   }, []);
+
+  useEffect(() => {}, [recordings]);
 
   const getRecordingsByExperimentId = () => {
     console.log(experiment_id);
@@ -31,9 +35,8 @@ const Experiment = (props) => {
 
     axios(config)
       .then(function (response) {
-        console.log(response.data);
+        setRecordings(response.data);
         formatData(response.data);
-        console.log(JSON.stringify(response.data));
       })
       .catch(function (error) {
         console.log(error);
@@ -82,7 +85,6 @@ const Experiment = (props) => {
       };
       objs.push(obj);
     });
-    console.log(objs);
     setData(objs);
     //TODO: continue once recordings without authors and all that have been deleted
     // const formattedData = [
@@ -99,10 +101,24 @@ const Experiment = (props) => {
     // ];
   };
 
+  const handleDownloadAll = () => {
+    //1. Ensure recordings API call was successful
+    console.assert(recordings != null);
+    console.log(recordings);
+    recordings.map((recording) => {
+      downloadFileFromS3(recording._id);
+    });
+    //2. pass these recordings to be individually downloaded  and stored in zip
+    // await downloadFileFromS3();
+  };
+
+  const downloadFileFromS3 = () => {};
+
   return (
     //todo: Experiment page with id, name, game, author and all recordings associated w experiment in a table
     <Layout>
       <h1> Experiment {experiment_id} </h1>
+      <button onClick={handleDownloadAll}> Download all recordings </button>
       {/* recordings table */}
       {console.log(`/experiment/${experiment_id}/recording/new`)}
       <button

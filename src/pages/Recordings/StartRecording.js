@@ -20,6 +20,8 @@ const StartRecording = (props) => {
   const [isConnected, setIsConnected] = useState(false);
   const [experiments, setExperiments] = useState([]);
   const [isStreaming, setIsStreaming] = useState(false);
+  const [gamePage, setGamePage] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   useEffect(() => {
     getExperiments();
     socket.on("connect", () => console.log(socket.id));
@@ -89,8 +91,30 @@ const StartRecording = (props) => {
     localStorage.setItem("recordingParameters", JSON.stringify(obj));
 
     console.log(localStorage.getItem("recordingParameters"));
-    navigate("/games/left_right");
-    // TODO: Axios call to startRecording API endpoint
+    // navigate("/games/left_right");
+    // start recording for video experiment
+
+    var config = {
+      method: "post",
+      url: `${process.env.REACT_APP_BACKEND_URL}/api/recordings/start`,
+      headers: {},
+    };
+
+    axios(config)
+      .then(function (response) {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    console.log(selectedOption);
+    if (selectedOption == "left-right") {
+      navigate("/games/left-right");
+    } else if (selectedOption == "video") {
+      navigate("/games/video");
+    } else {
+      console.log("Error: No game selected. Cannot navigate to the next page");
+    }
   };
 
   return (
@@ -170,6 +194,20 @@ const StartRecording = (props) => {
               placeholder="20"
             ></input>
           </div>
+          <div>
+            <select
+              value=""
+              onChange={(e) => {
+                setSelectedOption(e.target.value);
+                console.log(e.target.value);
+              }}
+            >
+              {/* Below is not a viable option to account for the fact that clicking on left/right will not trigger onChange. I need to change it to something else  */}
+              <option value=" ">None</option>
+              <option value="left-right">Left Right</option>
+              <option value="video">Video</option>
+            </select>
+          </div>
           <div>Created at 12:26 8:30 AM</div>
           <div>Author {author ? author : "unknown"}</div>
           <div>
@@ -179,7 +217,10 @@ const StartRecording = (props) => {
 
         <div id="t3" class="tabcontent" style={{ display: "none" }}>
           <div>
-            <button onClick={handleSubmit}> Start recording </button>
+            <button data-testid="button" onClick={handleSubmit}>
+              {" "}
+              Start recording{" "}
+            </button>
           </div>
         </div>
       </div>

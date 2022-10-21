@@ -1,7 +1,7 @@
 import React from "react";
 import Table from "./../Components/Table/Table";
 import Layout from "../Components/Layout/Layout";
-import Video from "../Components/Video";
+import Video from "../Components/Video/Video";
 import SleepSchedule from "../Components/SleepSchedule";
 const Games = (props) => {
   const data = [

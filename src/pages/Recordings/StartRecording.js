@@ -217,7 +217,10 @@ const StartRecording = (props) => {
 
         <div id="t3" class="tabcontent" style={{ display: "none" }}>
           <div>
-            <button onClick={handleSubmit}> Start recording </button>
+            <button data-testid="button" onClick={handleSubmit}>
+              {" "}
+              Start recording{" "}
+            </button>
           </div>
         </div>
       </div>

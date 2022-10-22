@@ -23,11 +23,18 @@ const Table = (props) => {
       for (const rowEl of Object.entries(row)) {
         console.log(rowEl);
         console.log(rowEl[1].text);
-        if (rowEl[1].link != null) {
+        console.log(rowEl[1].external);
+        if (rowEl[1].link != null && !rowEl[1].external) {
           console.log("link not null");
           tr.push(
             <td>
               <Link to={rowEl[1].link}>{rowEl[1].text}</Link>
+            </td>
+          );
+        } else if (rowEl[1].external == true) {
+          tr.push(
+            <td>
+              <a href={rowEl[1].link}>{rowEl[1].text}</a>
             </td>
           );
         } else {

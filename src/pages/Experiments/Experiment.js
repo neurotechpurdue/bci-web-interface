@@ -81,6 +81,7 @@ const Experiment = (props) => {
         data: {
           text: recording.data,
           link: recording.data,
+          external: true
         },
       };
       objs.push(obj);

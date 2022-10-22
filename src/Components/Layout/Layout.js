@@ -9,7 +9,7 @@ const Layout = (props) => {
       <Navbar></Navbar>
       <div style={{ height: "100%", display: "flex", flexDirection: "row" }}>
         <VerticalNavbar></VerticalNavbar>
-        <div style={{ height: "100%", overflowY: "scroll" }} class="container">
+        <div style={{ overflowY: "scroll" }} class="container">
           {props.children}
         </div>
         {/* <div style={{ overflowY: "scroll", width: "90%", margin: "0px auto" }}>

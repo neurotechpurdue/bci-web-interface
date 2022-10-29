@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
-import vid from "./video.mp4";
+import vid from "./better_video.mp4";
 import { CSVLink, CSVDownload } from "react-csv";
 
 const Video = (props) => {

@@ -1,9 +1,27 @@
-table {
-  background: rgba(186, 136, 233, 0.8);
+.table {
+  background: rgba(186, 136, 233, 0.2);
   border-collapse: collapse;
-  border-radius: 10px;
+  border-radius: 30px;
+  padding: 20px;
+  color: white;
 }
-th, td {
+
+th,
+td {
   padding: 10px;
   border-spacing: 10px;
+}
+
+table tr td:first-child {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+}
+
+table tr td:last-child {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+tr:hover {
+  background: rgba(186, 136, 233, 0.6);
 }

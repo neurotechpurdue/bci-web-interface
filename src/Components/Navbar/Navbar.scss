@@ -1,5 +1,35 @@
 .navbar {
-  background-color: #348bd1;
+  background-color: #3e3d6f;
   color: white;
   padding: 10px;
 }
+
+.navbar > * {
+  margin: 10px 20px;
+  display: inline-block;
+}
+
+.link {
+  padding: 10px 15px;
+  border-radius: 25px;
+}
+.link:hover {
+  background-color: rgba(186, 136, 233, 0.2);
+  color: white;
+  border: solid rgba(186, 136, 233, 0.5);
+}
+
+// .bg {
+//   top: 10px;
+//   margin-left: -10px;
+//   width: 100px;
+//   height: 20px;
+//   background-color: rgba(186, 136, 233, 0.2);
+//   color: white;
+//   padding: 10px 15px;
+//   border: solid rgba(186, 136, 233, 0.5);
+//   border-radius: 25px;
+//   // z-index: -1;
+//   transition: 1s;
+//   position: absolute;
+// }

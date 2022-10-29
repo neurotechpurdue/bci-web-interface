@@ -13,6 +13,16 @@ body {
   color: white;
 }
 
+a:link {
+  color: white;
+}
+a:visited {
+  color: white;
+}
+a:hover {
+  color: rgba(255, 255, 255, 0.562);
+}
+
 #root {
   height: 100vh;
 }

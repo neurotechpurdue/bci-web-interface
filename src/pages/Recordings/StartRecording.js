@@ -194,7 +194,7 @@ const StartRecording = (props) => {
               placeholder="20"
             ></input>
           </div>
-          <div>
+          <div class="custom-select">
             <select
               value=""
               onChange={(e) => {

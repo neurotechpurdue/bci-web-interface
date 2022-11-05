@@ -1,9 +1,13 @@
 button {
-  background-color: #0c67b1;
+  background-color: rgba(186, 136, 233, 0.2);
   color: white;
   padding: 10px 15px;
-  border: none;
-  border-radius: 20px;
+  border: solid rgba(186, 136, 233, 0.5);
+  border-radius: 25px;
+}
+
+button:hover {
+  background-color: rgba(37, 36, 66, 0.2);
 }
 
 .container {
@@ -39,4 +43,58 @@ button {
 /* Create an active/current tablink class */
 .tab button.active {
   background-color: #063d6a;
+}
+
+input {
+  border-radius: 20px;
+  padding: 5px;
+  color: white;
+  border: solid rgba(186, 136, 233, 0.5) 2px;
+  background-color: rgba(186, 136, 233, 0.2);
+}
+
+input::placeholder {
+  color: white;
+  opacity: 0.7;
+}
+
+select {
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  box-shadow: 0 1px 3px -2px #9098a9;
+  background-color: rgba(186, 136, 233, 0.2);
+}
+
+select::-ms-expand {
+  display: none;
+}
+
+.custom-select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  border-radius: 0.25em;
+  overflow: hidden;
+}
+
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  background-color: #34495e;
+  transition: 0.25s all ease;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+option {
+  background-color: rgba(186, 136, 233, 0.2);
 }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Table.css";
 const Table = (props) => {
   const headers = props.columns.map((col, i) => {
-    return <th scope="col">{col}</th>;
+    return <th scope="col">{col.toUpperCase()}</th>;
   });
 
   /* 
@@ -51,10 +51,12 @@ const Table = (props) => {
   console.log(data);
   // same with the body
   return (
-    <table>
-      <thead>{headers}</thead>
-      <tbody>{data}</tbody>
-    </table>
+    <div class="table">
+      <table>
+        <thead>{headers}</thead>
+        <tbody>{data}</tbody>
+      </table>
+    </div>
   );
 };
 
